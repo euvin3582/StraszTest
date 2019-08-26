@@ -21,37 +21,34 @@ namespace TDD.Business {
         /// <param name="operationals"></param>
         /// <param name="presets"></param>
         /// <returns></returns>
-        public List<Item> Randomize(int operationals = 0, int prestests = 0)
+        public List<Item> Randomize(int operationals = 0, int pretests = 0)
         {
-            var orderedList = new List<Item>();
+            var totalList = new List<Item>();
+            var pretestList = new List<Item>();
+
             // first two items are always pretest items
-            for (int i = 0; i < prestests; i++)
+            for (int i = 0; i < pretests; i++)
             {
-                if (i < 2)
-                {
-                    _items.Add(
-                        new Item
-                        {
-                            ItemId = Guid.NewGuid(),
-                            ItemType = ItemTypeEnum.Prestest
-                        }
-                    );
-                }
-                else
-                {
-                    orderedList.Add(
-                        new Item
-                        {
-                            ItemId = Guid.NewGuid(),
-                            ItemType = ItemTypeEnum.Prestest
-                        }
-                    );
-                }
+                pretestList.Add(
+                    new Item {
+                        ItemId = Guid.NewGuid(),
+                        ItemType = ItemTypeEnum.Pretest
+                    }
+                );
+            }
+
+            // shuffle the list of pretest before inserting into final return list
+            pretestList = ShuffleList(pretestList, 0, pretests);
+
+            // get the first element and pop from the list
+            for (int i = 0; i < 2; i++) {
+                _items.Add(pretestList.ElementAt(0));
+                pretestList.RemoveAt(0);
             }
 
             for (int i = 0; i < operationals; i++)
             {
-                orderedList.Add(
+                totalList.Add(
                     new Item
                     {
                         ItemId = Guid.NewGuid(),
@@ -60,9 +57,12 @@ namespace TDD.Business {
                 );
             }
 
-            var total = operationals + prestests;
+            // include pretest list to total list
+            totalList.AddRange(pretestList);
+
+            var total = operationals + pretests;
             // add random list to items list
-            _items.AddRange(ShuffleList(orderedList, 0, total));
+            _items.AddRange(ShuffleList(totalList, 0, totalList.Count));
 
             // return new list
             return _items;

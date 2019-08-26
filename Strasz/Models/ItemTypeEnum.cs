@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TDD.Models {
     public enum ItemTypeEnum {
-        Prestest = 0,
+        Pretest = 0,
         Opertational = 1
     }
 }

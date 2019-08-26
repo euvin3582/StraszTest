@@ -22,22 +22,22 @@ namespace TDD {
                 new Item
                 {
                     ItemId = Guid.NewGuid(),
-                    ItemType = ItemTypeEnum.Prestest
+                    ItemType = ItemTypeEnum.Pretest
                 },
                 new Item
                 {
                     ItemId = Guid.NewGuid(),
-                    ItemType = ItemTypeEnum.Prestest
+                    ItemType = ItemTypeEnum.Pretest
                 },
                 new Item
                 {
                     ItemId = Guid.NewGuid(),
-                    ItemType = ItemTypeEnum.Prestest
+                    ItemType = ItemTypeEnum.Pretest
                 },
                 new Item
                 {
                     ItemId = Guid.NewGuid(),
-                    ItemType = ItemTypeEnum.Prestest
+                    ItemType = ItemTypeEnum.Pretest
                 },
                 new Item
                 {
@@ -87,7 +87,7 @@ namespace TDD {
 
             if (randList.Count > 0)
             {
-                Assert.IsTrue(randList[0].ItemType == ItemTypeEnum.Prestest && randList[1].ItemType == ItemTypeEnum.Prestest);
+                Assert.IsTrue(randList[0].ItemType == ItemTypeEnum.Pretest && randList[1].ItemType == ItemTypeEnum.Pretest);
             }
             else
             {
