@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StraszTest.Models {
+namespace TDD.Models {
     
     public class Item {
         public Guid ItemId { get; set; }

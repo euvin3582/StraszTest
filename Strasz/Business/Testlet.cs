@@ -1,18 +1,18 @@
-﻿using StraszTest.Models;
+﻿using TDD.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace StraszTest.Business {
+namespace TDD.Business {
     public class Testlet {
         private string _testletId { get; set; }
-        private List<Item> _items;
+        private readonly List<Item> _items;
 
-        public Testlet(string testLetId, List<Item> items)
+        public Testlet(string testLetId)
         {
             _testletId = testLetId;
-            _items = items;
+            _items = new List<Item>();
         }
 
         /// <summary>
@@ -61,14 +61,20 @@ namespace StraszTest.Business {
             }
 
             var total = operationals + prestests;
-            var rand = new Random((int)DateTime.Now.Ticks);
-            var newRandList = orderedList.OrderBy(item => rand.Next(2, total)).ToList();
-
             // add random list to items list
-            _items.AddRange(newRandList);
+            _items.AddRange(ShuffleList(orderedList, 0, total));
 
             // return new list
             return _items;
+        }
+
+        public List<Item> ShuffleList(List<Item> testList, int minVal, int maxVal)
+        {
+            var rand = new Random((int)DateTime.Now.Ticks);
+            var newRandList = testList.OrderBy(item => rand.Next(minVal, maxVal)).ToList();
+
+            // random list
+            return newRandList;
         }
     }
 }
